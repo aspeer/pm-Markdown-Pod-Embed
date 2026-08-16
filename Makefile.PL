@@ -9,15 +9,15 @@ use Tie::File;
 use ExtUtils::MakeMaker;
 
 
-#  Bring in helper MakeMaker modules if available, non-fatal if not
+#  Bring in helper MakeMaker modules if available, non-fatal if not, uncomment as required
 #
 eval {
     # Utiltity sync targets
-    #require Local::ExtUtils::Common; Local::ExtUtils::Common->import(); 1 
+    # require Local::ExtUtils::Common; Local::ExtUtils::Common->import(); 1 
 };
 eval {
     # Git utilities
-    require ExtUtils::Git; ExtUtils::Git->import(); 1 
+    # require ExtUtils::Git; ExtUtils::Git->import(); 1 
 };
     
 
