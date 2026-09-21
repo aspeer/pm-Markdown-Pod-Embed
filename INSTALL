@@ -1,23 +1,6 @@
-INSTALLATION INSTRUCTIONS
+# Installing Markdown::Pod::Embed
 
-The latest version of this software is always available from Github
-
-    git clone https://github.com/aspeer/pm-ExtUtils-Markdown-Pod
-    cd pm-ExtUtils-Markdown-Pod
-
-If on a modern system:
-
-cpan .
-
-Or (faster, if available):
-
-cpanm .
-
-Failing that manual install:
-
-    perl Makefile.PL
-    make
-    make test
-    make install
-
-If installing manually, dependencies will have to be installed individually.
+Install prerequisites and this distribution with `cpanm .`.
+See README.md for external tools and the installation order of the related
+documentation distributions. For a manual build, run `perl Makefile.PL`,
+`make`, `make test`, and `make install`.

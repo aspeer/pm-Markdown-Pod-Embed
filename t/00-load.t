@@ -1,11 +1,6 @@
-#!perl
-
-#  Load
-#
-use Test::More qw(no_plan);
-use_ok( 'PPI' );
-use_ok( 'Markdown::Pod' );
-use_ok( 'ExtUtils::Markdown::Pod::MM::Util' );
-use_ok( 'ExtUtils::Markdown::Pod::Constant' );
-use_ok( 'ExtUtils::Markdown::Pod::MM::Import' );
-use_ok( 'ExtUtils::Markdown::Pod' );
+use strict;
+use warnings;
+use Test::More;
+use_ok('Markdown::Pod::Embed');
+ok(!exists($INC{'ExtUtils/MakeMaker.pm'}), 'processor does not load MakeMaker');
+done_testing();
