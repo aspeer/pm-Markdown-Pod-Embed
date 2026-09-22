@@ -1,4 +1,4 @@
-use 5.008;
+use 5.010;
 use strict;
 use warnings;
 use version;
@@ -31,7 +31,7 @@ my %WriteMakefile=(
     EXE_FILES        => ['bin/markpod'],
     LICENSE          => 'perl',
     AUTHOR           => 'Andrew Speer <andrew.speer@isolutions.com.au>',
-    MIN_PERL_VERSION => '5.008',
+    MIN_PERL_VERSION => '5.010',
     PREREQ_PM        => {
         'Carp'           => 0,
         'Config'         => 0,
@@ -44,7 +44,7 @@ my %WriteMakefile=(
         'File::Temp'     => 0,
         'Getopt::Long'   => 0,
         'IPC::Run3'      => 0,
-        'Markdown::Pod'  => 0,
+        'Markdown::Pod'  => '0.008',
         'PPI'            => 0,
         'strict'         => 0,
         'vars'           => 0,
@@ -61,7 +61,17 @@ my %WriteMakefile=(
     },
     META_MERGE => {
         'meta-spec' => {version => 2},
+        prereqs     => {
+            configure => {
+                suggests => {
+                    'ASPEER::MakeMaker::Markdown::Pod' => '0.012',
+                },
+            },
+        },
         resources   => {
+            bugtracker => {
+                web => 'https://gitea.isolutions.com.au/aspeer/pm-Markdown-Pod-Embed/issues',
+            },
             homepage   => 'https://gitea.isolutions.com.au/aspeer/pm-Markdown-Pod-Embed',
             repository => {
                 type => 'git',

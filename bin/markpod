@@ -1,8 +1,11 @@
 #!/usr/bin/env perl
 use strict;
+use vars qw($VERSION);
 use warnings;
 use Getopt::Long qw(GetOptions);
 use Markdown::Pod::Embed;
+
+$VERSION='0.011';
 
 my %opt;
 GetOptions(
@@ -13,11 +16,16 @@ GetOptions(
     'dialect=s' => \$opt{'dialect'},
     'extract-markdown|extract_markdown' => \$opt{'markdown'},
     'extract-pod|extract_pod' => \$opt{'pod'},
+    'version' => \$opt{'version'},
     'help' => \$opt{'help'},
 ) or die "invalid options; use --help\n";
 if ($opt{'help'}) {
     print "Usage: markpod [--inplace] [--recursive] [--dry-run] [--nobackup] FILE...\n";
     print "       markpod --extract-markdown|--extract-pod FILE\n";
+    exit 0;
+}
+if ($opt{'version'}) {
+    print "markpod $VERSION\n";
     exit 0;
 }
 die "supply a file or directory\n" unless @ARGV;
@@ -55,6 +63,8 @@ backup files. Without `--inplace`, complete transformed source is printed.
 Use `--extract-markdown FILE` or `--extract-pod FILE` to print documentation
 only. `--dialect GitHub` selects the Markdown::Pod dialect.
 
+`--version` prints the installed program version.
+
 Supply files explicitly, or use `--recursive` with directories. Unsupported
 options and failed operations exit nonzero. A file with no Markdown source is
 skipped. See Markdown::Pod::Embed for source precedence and preservation rules.
@@ -75,6 +85,8 @@ backup files. Without C<--inplace>, complete transformed source is printed.
 
 Use C<--extract-markdown FILE> or C<--extract-pod FILE> to print documentation
 only. C<--dialect GitHub> selects the Markdown::Pod dialect.
+
+C<--version> prints the installed program version.
 
 Supply files explicitly, or use C<--recursive> with directories. Unsupported
 options and failed operations exit nonzero. A file with no Markdown source is

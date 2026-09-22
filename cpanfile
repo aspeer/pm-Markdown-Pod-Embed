@@ -9,18 +9,18 @@ requires 'File::Spec';
 requires 'File::Temp';
 requires 'Getopt::Long';
 requires 'IPC::Run3';
-requires 'Markdown::Pod';
+requires 'Markdown::Pod', '0.008';
 requires 'PPI';
-requires 'perl', '5.008';
+requires 'perl', '5.010';
 requires 'strict';
 requires 'vars';
 requires 'warnings';
 
 on configure => sub {
     requires 'ExtUtils::MakeMaker';
-    requires 'perl', '5.008';
+    requires 'perl', '5.010';
     requires 'version';
-    suggests 'ASPEER::MakeMaker::Markdown::Pod';
+    suggests 'ASPEER::MakeMaker::Markdown::Pod', '0.012';
 };
 
 on test => sub {

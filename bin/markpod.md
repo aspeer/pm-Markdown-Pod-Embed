@@ -11,6 +11,8 @@ backup files. Without `--inplace`, complete transformed source is printed.
 Use `--extract-markdown FILE` or `--extract-pod FILE` to print documentation
 only. `--dialect GitHub` selects the Markdown::Pod dialect.
 
+`--version` prints the installed program version.
+
 Supply files explicitly, or use `--recursive` with directories. Unsupported
 options and failed operations exit nonzero. A file with no Markdown source is
 skipped. See Markdown::Pod::Embed for source precedence and preservation rules.

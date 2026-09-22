@@ -39,7 +39,7 @@ use File::Find ();
 #  Version information
 #
 $AUTHORITY='cpan:ASPEER';
-$VERSION='0.010';
+$VERSION='0.011';
 
 
 #  Done

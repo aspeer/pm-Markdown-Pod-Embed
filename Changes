@@ -1,0 +1,7 @@
+Revision history for Markdown-Pod-Embed
+
+0.011  2026-09-22
+
+    - First release under the Markdown::Pod::Embed namespace.
+    - Add recursive discovery, dry-run processing and atomic updates.
+    - Prefer Markdown sidecars while retaining embedded Markdown support.

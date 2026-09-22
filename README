@@ -25,7 +25,8 @@ See the API documentation and the examples. From a checkout, run
 prove -lr t.
 
 This distribution supplies the processor and markpod. Repository targets
-and licence maintenance are provided by ASPEER::MakeMaker::Markdown::Pod.
+and licence maintenance are provided by
+ASPEER::MakeMaker::Markdown::Pod.
 
 After ASPEER::MakeMaker::Markdown::Pod is installed, rerun
-perl Makefile.PL to enable this distribution’s own make doc targets.
+perl Makefile.PL to enable this distribution's own make doc targets.
