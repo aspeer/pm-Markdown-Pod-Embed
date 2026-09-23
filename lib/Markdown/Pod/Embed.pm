@@ -34,6 +34,7 @@ use Markdown::Pod;
 use File::Temp qw(tempfile);
 use File::Basename qw(dirname);
 use File::Find ();
+use File::Spec;
 
 
 #  Version information
@@ -112,7 +113,7 @@ sub markpod_process {
         $self->markpod_end_normalize($end_or) if $end_or;
         my $pod_md=$sidecar_md;
         my $pod=
-            $self->markpod_pod_merge($pod_md) ||
+            $self->markpod_pod_merge($pod_md, $fn) ||
                 return err();
         $pod.="\n=cut\n";
         unless ($end_or) {
@@ -163,7 +164,7 @@ sub markpod_process {
         }
         $md.=$pod_md;
         my $pod=
-            $self->markpod_pod_merge($pod_md) ||
+            $self->markpod_pod_merge($pod_md, $fn) ||
                 return err();
         push @raw_pod, $self->{'pod'};
         $pod.="\n=cut\n";
@@ -374,7 +375,7 @@ sub markpod_markdown_normalize {
 
 sub markpod_pod_merge {
 
-    my ($self, $md)=@_;
+    my ($self, $md, $fn)=@_;
     my ($conversion_md, $replacement_ar)=$self->markpod_markdown_prepare($md);
     my $md2pod_or=Markdown::Pod->new() ||
         return err ('unable to create new Markdown::Pod object');
@@ -382,6 +383,7 @@ sub markpod_pod_merge {
         dialect  => $self->{'opt'}{'dialect'},
         markdown => $conversion_md
     );
+    $pod=$self->markpod_pod_module_links($pod, $fn);
     foreach my $replacement_hr (@{$replacement_ar}) {
         my $placeholder=$replacement_hr->{'placeholder'};
         my $format=$replacement_hr->{'format'};
@@ -406,6 +408,48 @@ sub markpod_pod_merge {
     );
     #  This is markdown merged with created POD
     return $pod;
+
+}
+
+
+sub markpod_pod_module_links {
+
+    my ($self, $pod, $source_fn)=@_;
+    return $pod unless defined($source_fn) && length($source_fn);
+
+
+    #  Resolve links to companion module sidecars for the POD rendering. The
+    #  retained Markdown continues to use its repository-relative filename.
+    #
+    $pod=~s{L<([^<>|\r\n]+)\|([^<>|\r\n]+\.pm\.md)>}{
+        my ($label, $target)=($1, $2);
+        my $package=$self->markpod_module_link_package($source_fn, $target);
+        defined($package) ? "L<${label}|${package}>" : $&;
+    }ge;
+    return $pod;
+
+}
+
+
+sub markpod_module_link_package {
+
+    my ($self, $source_fn, $target)=@_;
+    return undef if File::Spec->file_name_is_absolute($target);
+
+    my $sidecar_fn=File::Spec->rel2abs($target, dirname($source_fn));
+    return undef unless -f $sidecar_fn;
+
+    my $module_fn=$sidecar_fn;
+    $module_fn=~s/\.md\z// || return undef;
+    return undef unless -f $module_fn;
+
+    my $ppi_doc_or=PPI::Document->new($module_fn) || return undef;
+    my $package_or=$ppi_doc_or->find_first('PPI::Statement::Package') ||
+        return undef;
+    my $package=$package_or->namespace();
+    return defined($package) && $package=~/\A[A-Za-z_]\w*(?:::\w+)*\z/
+        ? $package
+        : undef;
 
 }
 
@@ -595,6 +639,12 @@ Plain POD without a Markdown source is preserved. Generated documentation keeps
 both the embedded Markdown and its POD rendering, so embedded-only authoring
 continues to work.
 
+Relative Markdown links to existing companion `*.pm.md` sidecars remain file
+links in the retained Markdown. In the generated POD, their destinations become
+the package declared by the companion `.pm` file, so module links work in both
+renderings. Other relative links, unresolved targets, fragments, and external
+URLs are preserved as written.
+
 A leading Markdown page title immediately before `# NAME` is retained in the
 Markdown but omitted from the POD rendering. UTF-8 documentation receives an
 encoding declaration, and inline code and emphasis use safe POD delimiters when
@@ -664,6 +714,12 @@ it is absent or empty, Markdown inside C<=begin markdown> blocks is used instead
 Plain POD without a Markdown source is preserved. Generated documentation keeps
 both the embedded Markdown and its POD rendering, so embedded-only authoring
 continues to work.
+
+Relative Markdown links to existing companion C<*.pm.md> sidecars remain file
+links in the retained Markdown. In the generated POD, their destinations become
+the package declared by the companion C<.pm> file, so module links work in both
+renderings. Other relative links, unresolved targets, fragments, and external
+URLs are preserved as written.
 
 A leading Markdown page title immediately before C<# NAME> is retained in the
 Markdown but omitted from the POD rendering. UTF-8 documentation receives an

@@ -18,6 +18,12 @@ Plain POD without a Markdown source is preserved. Generated documentation keeps
 both the embedded Markdown and its POD rendering, so embedded-only authoring
 continues to work.
 
+Relative Markdown links to existing companion `*.pm.md` sidecars remain file
+links in the retained Markdown. In the generated POD, their destinations become
+the package declared by the companion `.pm` file, so module links work in both
+renderings. Other relative links, unresolved targets, fragments, and external
+URLs are preserved as written.
+
 A leading Markdown page title immediately before `# NAME` is retained in the
 Markdown but omitted from the POD rendering. UTF-8 documentation receives an
 encoding declaration, and inline code and emphasis use safe POD delimiters when
