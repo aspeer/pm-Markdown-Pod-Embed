@@ -55,9 +55,10 @@ my %WriteMakefile=(
         'version'             => 0,
     },
     TEST_REQUIRES => {
-        'File::Path' => 0,
-        'File::Temp' => 0,
-        'Test::More' => 0,
+        'File::Path'   => 0,
+        'File::Temp'   => 0,
+        'Pod::Checker' => 0,
+        'Test::More'   => 0,
     },
     META_MERGE => {
         'meta-spec' => {version => 2},

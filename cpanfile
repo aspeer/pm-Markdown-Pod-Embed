@@ -26,5 +26,6 @@ on configure => sub {
 on test => sub {
     requires 'File::Path';
     requires 'File::Temp';
+    requires 'Pod::Checker';
     requires 'Test::More';
 };

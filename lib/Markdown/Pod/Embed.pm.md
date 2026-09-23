@@ -18,6 +18,11 @@ Plain POD without a Markdown source is preserved. Generated documentation keeps
 both the embedded Markdown and its POD rendering, so embedded-only authoring
 continues to work.
 
+A leading Markdown page title immediately before `# NAME` is retained in the
+Markdown but omitted from the POD rendering. UTF-8 documentation receives an
+encoding declaration, and inline code and emphasis use safe POD delimiters when
+their contents would otherwise conflict with POD syntax.
+
 This library has no MakeMaker integration. Use ASPEER::MakeMaker::Markdown::Pod for
 repository targets and maintenance.
 

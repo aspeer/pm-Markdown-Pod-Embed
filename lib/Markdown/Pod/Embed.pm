@@ -375,14 +375,26 @@ sub markpod_markdown_normalize {
 sub markpod_pod_merge {
 
     my ($self, $md)=@_;
+    my ($conversion_md, $replacement_ar)=$self->markpod_markdown_prepare($md);
     my $md2pod_or=Markdown::Pod->new() ||
         return err ('unable to create new Markdown::Pod object');
-    my $pod=$md2pod_or->markdown_to_pod(dialect => $self->{'opt'}{'dialect'}, markdown => $md);
+    my $pod=$md2pod_or->markdown_to_pod(
+        dialect  => $self->{'opt'}{'dialect'},
+        markdown => $conversion_md
+    );
+    foreach my $replacement_hr (@{$replacement_ar}) {
+        my $placeholder=$replacement_hr->{'placeholder'};
+        my $format=$replacement_hr->{'format'};
+        my $text=$replacement_hr->{'text'};
+        my $formatted=$self->markpod_pod_format($format, $text);
+        $pod=~s/\Q${format}<${placeholder}>\E/$formatted/g;
+    }
+    my $encoding=$md=~/[^\x00-\x7f]/ ? "=encoding utf8\n\n" : '';
     $pod=~s/^[ \t]+$//mg;
     #  Make a note of raw POD for getter function
-    $self->{'pod'}=$pod;
+    $self->{'pod'}="${encoding}${pod}";
     debug('created pod: %d bytes', length($pod));
-    $pod=join(
+    $pod=$encoding.join(
         "\n",
         '=begin markdown',
         '',
@@ -394,6 +406,68 @@ sub markpod_pod_merge {
     );
     #  This is markdown merged with created POD
     return $pod;
+
+}
+
+
+sub markpod_markdown_prepare {
+
+    my ($self, $md)=@_;
+    my @replacement;
+    my $counter=0;
+
+    #  A leading page title is useful in Markdown but would create an empty
+    #  POD section immediately before the conventional NAME section.
+    #
+    $md=~s/\A[ \t]*\#[ \t]+[^\r\n]+?[ \t]*\#?[ \t]*\r?\n(?:[ \t]*\r?\n)+(?=[ \t]*\#[ \t]+NAME(?:[ \t]*\#)?[ \t]*(?:\r?\n|\z))//i;
+
+    #  Protect constructs that Markdent's GitHub dialect emits as ambiguous
+    #  POD. The placeholders contain no Markdown punctuation and are restored
+    #  with delimiters appropriate for their original content.
+    #
+    $md=~s{(?<!`)`(https?://[^`\r\n]+)`(?!`)}{
+        my $placeholder;
+        do {
+            $placeholder=sprintf('MARKPODTOKEN%06dX', ++$counter);
+        } while (index($md, $placeholder)>=0);
+        push(@replacement, {
+            format      => 'C',
+            placeholder => $placeholder,
+            text        => $1
+        });
+        "`${placeholder}`";
+    }ge;
+    $md=~s{(?<!\S)\*\*([^*\r\n]*?>[^*\r\n]*)\*\*}{
+        my $placeholder;
+        do {
+            $placeholder=sprintf('MARKPODTOKEN%06dX', ++$counter);
+        } while (index($md, $placeholder)>=0);
+        push(@replacement, {
+            format      => 'B',
+            placeholder => $placeholder,
+            text        => $1
+        });
+        "**${placeholder}**";
+    }ge;
+
+    return ($md, \@replacement);
+
+}
+
+
+sub markpod_pod_format {
+
+    my ($self, $format, $text)=@_;
+    return "${format}<${text}>" unless $text=~/[<>]/;
+
+    my $longest=0;
+    while ($text=~/(<+|>+)/g) {
+        my $length=length($1);
+        $longest=$length if $length>$longest;
+    }
+    my $delimiter='<' x ($longest + 1);
+    my $end_delimiter='>' x ($longest + 1);
+    return "${format}${delimiter} ${text} ${end_delimiter}";
 
 }
 
@@ -521,6 +595,11 @@ Plain POD without a Markdown source is preserved. Generated documentation keeps
 both the embedded Markdown and its POD rendering, so embedded-only authoring
 continues to work.
 
+A leading Markdown page title immediately before `# NAME` is retained in the
+Markdown but omitted from the POD rendering. UTF-8 documentation receives an
+encoding declaration, and inline code and emphasis use safe POD delimiters when
+their contents would otherwise conflict with POD syntax.
+
 This library has no MakeMaker integration. Use ASPEER::MakeMaker::Markdown::Pod for
 repository targets and maintenance.
 
@@ -585,6 +664,11 @@ it is absent or empty, Markdown inside C<=begin markdown> blocks is used instead
 Plain POD without a Markdown source is preserved. Generated documentation keeps
 both the embedded Markdown and its POD rendering, so embedded-only authoring
 continues to work.
+
+A leading Markdown page title immediately before C<# NAME> is retained in the
+Markdown but omitted from the POD rendering. UTF-8 documentation receives an
+encoding declaration, and inline code and emphasis use safe POD delimiters when
+their contents would otherwise conflict with POD syntax.
 
 This library has no MakeMaker integration. Use ASPEER::MakeMaker::Markdown::Pod for
 repository targets and maintenance.
