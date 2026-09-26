@@ -4,14 +4,25 @@ Maintain Perl documentation in Markdown and merge its POD rendering into the
 source file. A nonempty sidecar such as `lib/Example.pm.md` takes precedence;
 otherwise embedded Markdown is used. Existing plain POD is preserved.
 
+## Installation
+
+Install the released distribution and its Perl prerequisites from CPAN:
+
+```sh
+cpanm Markdown::Pod::Embed
+```
+
+Pandoc is also needed if you call the Markdown-to-text method.
+
 ## GitHub Attestations
 
 The release workflow generates [GitHub artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations)
 for distribution archives. Install the [GitHub CLI](https://cli.github.com/)
 with `gh attestation` support and authenticate with `gh auth login`.
 
-Download `Markdown-Pod-Embed-VERSION.tar.gz` from a GitHub release, MetaCPAN,
-or a CPAN mirror, replace `VERSION`, and verify it with:
+To verify a CPAN release archive separately, download
+`Markdown-Pod-Embed-VERSION.tar.gz` from MetaCPAN or a CPAN mirror, replace
+`VERSION`, and run:
 
 ```sh
 gh attestation verify Markdown-Pod-Embed-VERSION.tar.gz --repo aspeer/pm-Markdown-Pod-Embed
@@ -22,10 +33,7 @@ attestation from this repository. The workflow publishes the same archive to
 GitHub Releases and CPAN. Older releases and GitHub's automatically generated
 source-code archives are not covered.
 
-## Install and use
-
-Install the distribution and its CPAN prerequisites with `cpanm .`. Pandoc is
-also needed if you call the Markdown-to-text method.
+## Use
 
 ```sh
 markpod --dry-run --recursive lib
@@ -48,5 +56,6 @@ See [the API documentation](lib/Markdown/Pod/Embed.pm.md) and
 This distribution supplies the processor and `markpod`. Repository targets and
 licence maintenance are provided by ASPEER::MakeMaker::Markdown::Pod.
 
-After ASPEER::MakeMaker::Markdown::Pod is installed, rerun
-`perl Makefile.PL` to enable this distribution's own `make doc` targets.
+For checkout development, install the documentation integration from CPAN with
+`cpanm ASPEER::MakeMaker::Markdown::Pod`, then rerun `perl Makefile.PL` to
+enable this distribution's own `make doc` targets.

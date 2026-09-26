@@ -1,6 +1,7 @@
 # Examples
 
-Install Markdown::Pod::Embed first, or run the commands from this distribution
+Install Markdown::Pod::Embed from CPAN with `cpanm Markdown::Pod::Embed`, or
+run the commands from this distribution
 with `PERL5LIB=lib`. Each example is independent.
 
 - `sidecar/` shows a script documented by a neighbouring Markdown file.
