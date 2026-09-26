@@ -29,7 +29,7 @@ use Exporter;
 
 #  Version and exports
 #
-$VERSION='0.011';
+$VERSION='1.010';
 @ISA=qw(Exporter);
 @EXPORT=qw(err msg debug verbose slurp blurp Dumper quiet_enable
     verbose_enable debug_enable);

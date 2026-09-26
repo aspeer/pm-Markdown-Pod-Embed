@@ -40,7 +40,7 @@ use File::Spec;
 #  Version information
 #
 $AUTHORITY='cpan:ASPEER';
-$VERSION='0.011';
+$VERSION='1.010';
 
 
 #  Done

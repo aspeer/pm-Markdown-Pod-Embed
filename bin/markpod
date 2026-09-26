@@ -5,7 +5,7 @@ use warnings;
 use Getopt::Long qw(GetOptions);
 use Markdown::Pod::Embed;
 
-$VERSION='0.011';
+$VERSION='1.010';
 
 my %opt;
 GetOptions(

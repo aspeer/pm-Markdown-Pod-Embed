@@ -30,7 +30,7 @@ use File::Spec;
 
 #  Version and exports
 #
-$VERSION='0.011';
+$VERSION='1.010';
 @ISA=qw(Exporter);
 @EXPORT=qw($OPTION_HR $PANDOC_EXE $PANDOC_CMD_MD2TEXT_CR);
 
