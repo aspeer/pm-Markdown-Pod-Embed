@@ -16,3 +16,12 @@ only. `--dialect GitHub` selects the Markdown::Pod dialect.
 Supply files explicitly, or use `--recursive` with directories. Unsupported
 options and failed operations exit nonzero. A file with no Markdown source is
 skipped. See Markdown::Pod::Embed for source precedence and preservation rules.
+
+# AUTHOR
+
+Andrew Speer <andrew.speer@isolutions.com.au>
+
+# LICENSE AND COPYRIGHT
+
+This software is copyright (c) 2026 by Andrew Speer. It may be distributed
+under the same terms as Perl itself.

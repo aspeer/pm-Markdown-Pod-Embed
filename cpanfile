@@ -20,7 +20,7 @@ on configure => sub {
     requires 'ExtUtils::MakeMaker';
     requires 'perl', '5.010';
     requires 'version';
-    suggests 'ASPEER::MakeMaker::Markdown::Pod', '0.012';
+    suggests 'ASPEER::MakeMaker::Markdown::Pod', '1.010';
 };
 
 on test => sub {

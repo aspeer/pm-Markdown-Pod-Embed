@@ -28,6 +28,7 @@ t/02-markdown-source.t
 t/03-update-behavior.t
 t/05-independent.t
 t/06-pod-regressions.t
+t/07-companion-links.t
 t/data/embedded-sample.pl
 t/data/sidecar-sample.pl
 t/data/sidecar-sample.pl.md

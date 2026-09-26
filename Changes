@@ -1,7 +1,9 @@
 Revision history for Markdown-Pod-Embed
 
-0.011  2026-09-22
+1.011  2026-09-26
 
     - First release under the Markdown::Pod::Embed namespace.
     - Add recursive discovery, dry-run processing and atomic updates.
     - Prefer Markdown sidecars while retaining embedded Markdown support.
+    - Preserve POD around quoted, indented and marker-like Markdown edge cases.
+    - Rewrite verified companion sidecar module links for generated POD.

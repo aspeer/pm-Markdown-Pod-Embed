@@ -83,6 +83,15 @@ utility; applications should configure the processor through its constructor.
 
 `Markdown::Pod::Embed`, `markpod`
 
+# AUTHOR
+
+Andrew Speer <andrew.speer@isolutions.com.au>
+
+# LICENSE AND COPYRIGHT
+
+This software is copyright (c) 2026 by Andrew Speer. It may be distributed
+under the same terms as Perl itself.
+
 =end markdown
 
 
@@ -101,5 +110,16 @@ utility; applications should configure the processor through its constructor.
 =head1 SEE ALSO
 
 C<Markdown::Pod::Embed>, C<markpod>
+
+
+=head1 AUTHOR
+
+Andrew Speer L<mailto:andrew.speer@isolutions.com.au>
+
+
+=head1 LICENSE AND COPYRIGHT
+
+This software is copyright (c) 2026 by Andrew Speer. It may be distributed
+under the same terms as Perl itself.
 
 =cut
