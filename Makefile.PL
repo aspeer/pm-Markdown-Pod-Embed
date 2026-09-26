@@ -61,6 +61,7 @@ my %WriteMakefile=(
         'Test::More'   => 0,
     },
     META_MERGE => {
+        x_authority => 'cpan:ASPEER',
         'meta-spec' => {version => 2},
         prereqs     => {
             configure => {
@@ -71,13 +72,13 @@ my %WriteMakefile=(
         },
         resources   => {
             bugtracker => {
-                web => 'https://gitea.isolutions.com.au/aspeer/pm-Markdown-Pod-Embed/issues',
+                web => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive/issues',
             },
-            homepage   => 'https://gitea.isolutions.com.au/aspeer/pm-Markdown-Pod-Embed',
+            homepage   => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive',
             repository => {
                 type => 'git',
-                url  => 'https://gitea.isolutions.com.au/aspeer/pm-Markdown-Pod-Embed.git',
-                web  => 'https://gitea.isolutions.com.au/aspeer/pm-Markdown-Pod-Embed',
+                url  => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive.git',
+                web  => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive',
             },
         },
     },

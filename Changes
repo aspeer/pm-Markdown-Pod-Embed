@@ -1,5 +1,12 @@
 Revision history for Markdown-Pod-Embed
 
+1.012  2026-09-26
+
+    - Publish public repository metadata through the GitHub mirror.
+    - Add contributor and security policies, dependency auditing and
+      artifact-attestation verification guidance.
+    - Declare the CPAN authority in distribution metadata.
+
 1.011  2026-09-26
 
     - First release under the Markdown::Pod::Embed namespace.
