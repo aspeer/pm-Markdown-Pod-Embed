@@ -8,7 +8,7 @@ This policy was updated on 2026-09-26.
 
 Please report security vulnerabilities via GitHub private vulnerability reporting:
 
-https://github.com/aspeer/pm-Markdown-Pod-Embed.archive/security/advisories/new
+https://github.com/aspeer/pm-Markdown-Pod-Embed/security/advisories/new
 
 If you cannot use GitHub, report the issue privately to Andrew Speer
 <andrew.speer@isolutions.com.au>. Do not report vulnerabilities through public

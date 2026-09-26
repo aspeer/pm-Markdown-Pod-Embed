@@ -72,13 +72,13 @@ my %WriteMakefile=(
         },
         resources   => {
             bugtracker => {
-                web => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive/issues',
+                web => 'https://github.com/aspeer/pm-Markdown-Pod-Embed/issues',
             },
-            homepage   => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive',
+            homepage   => 'https://github.com/aspeer/pm-Markdown-Pod-Embed',
             repository => {
                 type => 'git',
-                url  => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive.git',
-                web  => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.archive',
+                url  => 'https://github.com/aspeer/pm-Markdown-Pod-Embed.git',
+                web  => 'https://github.com/aspeer/pm-Markdown-Pod-Embed',
             },
         },
     },

@@ -14,7 +14,7 @@ Download `Markdown-Pod-Embed-VERSION.tar.gz` from a GitHub release, MetaCPAN,
 or a CPAN mirror, replace `VERSION`, and verify it with:
 
 ```sh
-gh attestation verify Markdown-Pod-Embed-VERSION.tar.gz --repo aspeer/pm-Markdown-Pod-Embed.archive
+gh attestation verify Markdown-Pod-Embed-VERSION.tar.gz --repo aspeer/pm-Markdown-Pod-Embed
 ```
 
 A successful verification confirms that the archive checksum matches an

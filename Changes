@@ -1,5 +1,10 @@
 Revision history for Markdown-Pod-Embed
 
+1.013  2026-09-26
+
+    - Use the canonical GitHub repository URL in public metadata and
+      documentation.
+
 1.012  2026-09-26
 
     - Publish public repository metadata through the GitHub mirror.

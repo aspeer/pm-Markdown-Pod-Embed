@@ -40,7 +40,7 @@ use File::Spec;
 #  Version information
 #
 $AUTHORITY='cpan:ASPEER';
-$VERSION='1.012';
+$VERSION='1.013';
 
 
 #  Done
@@ -687,19 +687,10 @@ only after writing the complete result. Symlinks are not replaced. Insertion
 after a data section without existing POD is refused; move documentation ahead
 of the data or supply an appropriate existing documentation block first.
 
-# LICENSE and COPYRIGHT
+# LICENSE
 
-This file is part of Markdown::Pod::Embed.
-
-This software is copyright (c) 2026 by Andrew Speer <andrew.speer@isolutions.com.au>.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
-Full license text is available at:
-
-<http://dev.perl.org/licenses/>
-
+This software is copyright (c) 2026 by Andrew Speer. It may be distributed under
+the same terms as Perl itself.
 
 =end markdown
 
